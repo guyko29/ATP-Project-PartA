@@ -5,13 +5,18 @@ public class Maze {
     private final int column;
     private int[][] grid;
 
-    private Position start_pos;
-    private Position goal_pos;
+    private Position start_position;
+    private Position goal_position;
 
-    public Maze(int row, int column) {
+    public Maze(int row, int column, Position start_pos, Position goal_pos) {
+        if (row < 2 || column < 2) {
+            throw new IllegalArgumentException("Row and column must be greater than 1.");
+        }
         this.row = row;
         this.column = column;
         this.grid = new int[row][column];
+        this.start_position = start_pos;
+        this.goal_position = goal_pos;
     }
 
     public int getRow() {
@@ -27,11 +32,11 @@ public class Maze {
     }
 
     public void setStart_pos(int row, int column) {
-        start_pos = new Position(row, column);
+        start_position = new Position(row, column);
         setCellTo0(row, column);
     }
     public void setGoal_pos(int row, int column) {
-        goal_pos = new Position(row, column);
+        goal_position = new Position(row, column);
         setCellTo0(row, column);
     }
 
@@ -44,20 +49,20 @@ public class Maze {
     }
 
     public Position getStartPosition() {
-        return start_pos;
+        return start_position;
     }
 
     public Position getGoalPosition() {
-        return goal_pos;
+        return goal_position;
     }
 
     public void print() {
         StringBuilder mazeStr = new StringBuilder();
         for (int r = 0; r < row; r++) {
             for (int c = 0; c < column; c++) {
-                if (r == start_pos.getRowIndex() && c == start_pos.getColumnIndex()) {
+                if (r == start_position.getRowIndex() && c == start_position.getColumnIndex()) {
                     mazeStr.append(" ").append("S");
-                } else if (r == goal_pos.getRowIndex() && c == goal_pos.getColumnIndex()) {
+                } else if (r == goal_position.getRowIndex() && c == goal_position.getColumnIndex()) {
                     mazeStr.append(" ").append("E");
                 } else {
                     mazeStr.append(" ").append(grid[r][c]);

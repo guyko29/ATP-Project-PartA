@@ -11,6 +11,6 @@ public class AMazeGenerator implements IMazeGenerator{
         long start_time = System.currentTimeMillis();
         generate(row, column);
         long end_time = System.currentTimeMillis();
-        return end_time - start_time;
+        return (end_time - start_time);
     }
 }
