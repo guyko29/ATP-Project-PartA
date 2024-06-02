@@ -56,6 +56,13 @@ public class Maze {
         return goal_position;
     }
 
+    public int getCell(int row, int column) {
+        if (row < this.row && column < this.column) {
+            return grid[row][column];
+        }
+        return -1;
+    }
+
     public void print() {
         StringBuilder mazeStr = new StringBuilder();
         for (int r = 0; r < row; r++) {

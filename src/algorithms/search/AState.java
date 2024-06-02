@@ -17,6 +17,10 @@ public class AState {
         this.cost = cost;
     }
 
+    public void trueVisited() {
+        this.is_visited = true;
+    }
+
     public boolean isIs_visited() {
         return is_visited;
     }
@@ -31,5 +35,12 @@ public class AState {
 
     public void setCome_from(AState come_from) {
         this.come_from = come_from;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) { return true; }
+        if (object == null || this.getClass() != object.getClass()) { return false; }
+        return false;
     }
 }
