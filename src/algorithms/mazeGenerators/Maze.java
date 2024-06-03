@@ -4,7 +4,6 @@ public class Maze {
     private final int row;
     private final int column;
     private int[][] grid;
-
     private Position start_position;
     private Position goal_position;
 
@@ -35,6 +34,7 @@ public class Maze {
         start_position = new Position(row, column);
         setCellTo0(row, column);
     }
+
     public void setGoal_pos(int row, int column) {
         goal_position = new Position(row, column);
         setCellTo0(row, column);

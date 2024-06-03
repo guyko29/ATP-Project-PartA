@@ -14,6 +14,11 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
     }
 
     @Override
+    public String getName() {
+        return algorithm_name;
+    }
+
+    @Override
     public Solution solve(ISearchable searchable) {
         if (searchable == null) { return null; }
         Solution solution = new Solution();
@@ -28,8 +33,10 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
             }
             ArrayList<AState> neighbors_state = searchable.getAllPossibleStates(current_state);
             for (AState neighbor : neighbors_state) {
-                neighbor.setCome_from(current_state);
-                queue.add(neighbor);
+                if (!queue.contains(neighbor)) {
+                    neighbor.setCome_from(current_state);
+                    queue.add(neighbor);
+                }
             }
         }
         return solution;

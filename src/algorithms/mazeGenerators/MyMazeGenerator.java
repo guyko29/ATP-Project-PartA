@@ -1,4 +1,45 @@
 package algorithms.mazeGenerators;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class MyMazeGenerator extends AMazeGenerator {
+    private final Random random = new Random();
+    @Override
+    public Maze generate(int row, int column) {
+        Position start_pos = new Position(0, 0);
+        Position goal_pos = new Position(row - 1, column - 1);
+        Maze maze = new Maze(row, column, start_pos, goal_pos);
+        int[][] grid_maze = new int[row][column];
+        for (int r = 0; r < row; r++) {
+            for (int c = 0; c < column; c++) {
+                grid_maze[r][c] = 1;
+            }
+        }
+        grid_maze[0][0] = 0;
+        ArrayList<Position> walls = new ArrayList<>();
+        walls.add(new Position(0, 1)); // START RIGHT
+        walls.add(new Position(1, 0)); // START BOTTOM
+        while (!walls.isEmpty()) {
+            int wall_index = random.nextInt(walls.size());
+            Position new_position = walls.get(wall_index);
+            if (new_position.getRowIndex() % 2 != 0) {
+                // makeWallForOddRow
+            } else {
+                // makeWallForOddColumn
+            }
+        }
+        if (column % 2 == 0) {
+            for (int i = column - 1; i >= 0; i--) {
+                if (grid_maze[row - 2][i] == 0) {
+                    grid_maze[row - 1][i] = 0;
+                    maze.setGoal_pos(row - 1, i);
+                    break;
+                }
+            }
+        }
+        // new_maze_generated.setMaze_map(map_maze);
+
+        return maze;
+    }
 }

@@ -2,13 +2,13 @@ package algorithms.search;
 
 import java.util.PriorityQueue;
 
-public class ASearchingAlgorithm implements ISearchingAlgorithm {
+public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
     protected int visited_state;
     protected PriorityQueue<AState> queue;
     protected String algorithm_name;
 
     public ASearchingAlgorithm() {
-        this.queue = new PriorityQueue<>();
+        this.queue = new PriorityQueue<AState>();
         this.visited_state = 0;
     }
 

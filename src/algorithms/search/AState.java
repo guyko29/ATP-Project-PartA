@@ -1,6 +1,6 @@
 package algorithms.search;
 
-public class AState {
+public abstract class AState {
     private double cost;
     private boolean is_visited;
     private AState come_from;
