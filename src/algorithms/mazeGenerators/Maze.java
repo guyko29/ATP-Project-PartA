@@ -48,6 +48,11 @@ public class Maze {
         grid[row][column] = 1;
     }
 
+    public void setMaze_map(int[][] grid_map) {
+        this.grid = grid_map;
+    }
+
+
     public Position getStartPosition() {
         return start_position;
     }
