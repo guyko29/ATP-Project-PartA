@@ -20,7 +20,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
 
     @Override
     public Solution solve(ISearchable searchable) {
-        if (searchable == null) { return null; }
+        if (searchable == null) { return new Solution(); }
         Solution solution = new Solution();
         AState start_state = searchable.getStartState();
         queue.add(start_state);
@@ -28,7 +28,8 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
             AState current_state = queue.poll();
             visited_state++;
             current_state.trueVisited();
-            if (searchable.getGoalState().equals(current_state)) { // NAME
+            if (searchable.getGoalState().equals(current_state)) {
+                System.out.println("reach");
                 return createSolution(start_state, current_state, solution);
             }
             ArrayList<AState> neighbors_state = searchable.getAllPossibleStates(current_state);

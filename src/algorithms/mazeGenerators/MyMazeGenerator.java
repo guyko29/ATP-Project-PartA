@@ -39,6 +39,7 @@ public class MyMazeGenerator extends AMazeGenerator {
                 }
             }
         }
+        maze.setMaze_map(grid_maze);
         return maze;
     }
 

@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
-public class BestFirstSearch extends ASearchingAlgorithm {
+public class BestFirstSearch extends BreadthFirstSearch {
 
     public BestFirstSearch() {
         queue = new PriorityQueue<AState>(new ComparatorAState());

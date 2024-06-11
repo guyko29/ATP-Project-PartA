@@ -5,8 +5,11 @@ public abstract class AState {
     private boolean is_visited;
     private AState come_from;
 
-    public AState() {
+    private String state_name;
+
+    public AState(String state_name) {
         this.is_visited = false;
+        this.state_name = state_name;
     }
 
     public double getCost() {
@@ -29,6 +32,10 @@ public abstract class AState {
         this.is_visited = is_visited;
     }
 
+    public String getState_name() {
+        return state_name;
+    }
+
     public AState getCome_from() {
         return come_from;
     }
@@ -41,6 +48,7 @@ public abstract class AState {
     public boolean equals(Object object) {
         if (this == object) { return true; }
         if (object == null || this.getClass() != object.getClass()) { return false; }
-        return false;
+        AState new_Astate = (AState) object;
+        return state_name != null ? state_name.equals(new_Astate.getState_name()) : new_Astate.state_name == null;
     }
 }

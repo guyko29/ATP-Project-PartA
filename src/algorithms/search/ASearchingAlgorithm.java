@@ -8,7 +8,7 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
     protected String algorithm_name;
 
     public ASearchingAlgorithm() {
-        this.queue = new PriorityQueue<AState>();
+        this.queue = new PriorityQueue<>();
         this.visited_state = 0;
     }
 

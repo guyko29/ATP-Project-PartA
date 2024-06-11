@@ -5,8 +5,8 @@ import algorithms.mazeGenerators.Position;
 public class MazeState extends AState {
     Position current_position;
 
-    public MazeState(Position current_position) {
-        super();
+    public MazeState(Position current_position, String state_name) {
+        super(state_name);
         this.current_position = current_position;
     }
 

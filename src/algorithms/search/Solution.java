@@ -9,10 +9,6 @@ public class Solution {
         this.path = new ArrayList<>();
     }
 
-    public ArrayList<AState> getPath() {
-        return path;
-    }
-
     public void addStateSolution(AState new_State) {
         this.path.add(0, new_State);
     }
