@@ -34,7 +34,7 @@ public class MyMazeGenerator extends AMazeGenerator {
             for (int i = column - 1; i >= 0; i--) {
                 if (grid_maze[row - 2][i] == 0) {
                     grid_maze[row - 1][i] = 0;
-                    maze.setGoal_pos(row - 1, i);
+                    maze.setGoal_pos(new Position(row - 1, i));
                     break;
                 }
             }

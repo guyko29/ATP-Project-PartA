@@ -28,18 +28,20 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
             AState current_state = queue.poll();
             visited_state++;
             current_state.trueVisited();
-            if (searchable.getGoalState().equals(current_state)) {
-                System.out.println("reach");
-                return createSolution(start_state, current_state, solution);
+            if (searchable.isArrivedToGoal(current_state, searchable.getGoalState())) {
+                Solution final_solution = createSolution(start_state, current_state, solution);
+                searchable.restartMaze();
+                return final_solution;
             }
             ArrayList<AState> neighbors_state = searchable.getAllPossibleStates(current_state);
-            for (AState neighbor : neighbors_state) {
-                if (!queue.contains(neighbor)) {
-                    neighbor.setCome_from(current_state);
-                    queue.add(neighbor);
+            for (AState aState : neighbors_state) {
+                if (!queue.contains(aState)) {
+                    aState.setCome_from(current_state);
+                    queue.add(aState);
                 }
             }
         }
+        searchable.restartMaze();
         return solution;
     }
 }

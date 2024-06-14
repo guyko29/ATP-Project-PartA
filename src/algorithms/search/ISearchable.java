@@ -9,4 +9,8 @@ public interface ISearchable {
     AState getStartState();
 
     AState getGoalState();
+
+    public void restartMaze();
+
+    boolean isArrivedToGoal(AState current_state, AState goal_state);
 }

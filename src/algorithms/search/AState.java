@@ -44,11 +44,21 @@ public abstract class AState {
         this.come_from = come_from;
     }
 
+    public void restartState() {
+        come_from = null;
+        is_visited = false;
+    }
+
+    @Override
+    public String toString() {
+        return state_name;
+    }
+
     @Override
     public boolean equals(Object object) {
-        if (this == object) { return true; }
-        if (object == null || this.getClass() != object.getClass()) { return false; }
-        AState new_Astate = (AState) object;
-        return state_name != null ? state_name.equals(new_Astate.getState_name()) : new_Astate.state_name == null;
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        AState state = (AState) object;
+        return this.state_name != null ? this.state_name.equals(state.getState_name()) : state.getState_name() == null;
     }
 }

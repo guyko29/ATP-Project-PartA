@@ -2,7 +2,6 @@ package algorithms.search;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Stack;
 
 public class DepthFirstSearch extends ASearchingAlgorithm {
@@ -20,7 +19,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
 
     @Override
     public Solution solve(ISearchable searchable) {
-        if (searchable == null) { return null; }
+        if (searchable == null) { return new Solution(); }
         Solution solution = new Solution();
         HashSet<AState> hashSetState = new HashSet<>();
         AState start_state = searchable.getStartState();
@@ -29,18 +28,21 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
             AState current_state = stackState.pop();
             visited_state++;
             current_state.trueVisited();
-            if (searchable.getGoalState().equals(current_state)) {
-                return createSolution(start_state, current_state, solution);
+            if (searchable.isArrivedToGoal(current_state, searchable.getGoalState())) {
+                Solution final_solution = createSolution(start_state, current_state, solution);
+                searchable.restartMaze();
+                return final_solution;
             }
             ArrayList<AState> neighbors_state = searchable.getAllPossibleStates(current_state);
             for (AState neighbor : neighbors_state) {
-                if (!hashSetState.contains(neighbor) && !stackState.contains(current_state)) {
+                if (!hashSetState.contains(neighbor) && !stackState.contains(neighbor)) {
                     stackState.push(neighbor);
                     neighbor.setCome_from(current_state);
                 }
             }
             hashSetState.add(current_state);
         }
+        searchable.restartMaze();
         return solution;
     }
 }

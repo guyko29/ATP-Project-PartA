@@ -12,6 +12,11 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
         this.visited_state = 0;
     }
 
+    public AState queuePop() {
+        visited_state++;
+        return queue.poll();
+    }
+
     @Override
     public Solution solve(ISearchable searchable) {
         return null;
@@ -32,7 +37,9 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
             solution.addStateSolution(current_state);
             current_state = current_state.getCome_from();
         }
-        solution.addStateSolution(start_state);
+        if (start_state.equals(current_state)) {
+            solution.addStateSolution(start_state);
+        }
         return solution;
     }
 }

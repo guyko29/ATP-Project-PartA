@@ -74,4 +74,19 @@ public class SearchableMaze implements ISearchable {
     public AState getGoalState() {
         return new MazeState(maze.getGoalPosition(), "Goal Position");
     }
+
+    @Override
+    public void restartMaze() {
+        int rows = maze.getRow();
+        int cols = maze.getColumn();
+        for (int i = 0; i < rows; i++){
+            for (int j = 0; j < cols; j++) {
+                (this.maze_state[i][j]).restartState();
+            }
+        }
+    }
+
+    public boolean isArrivedToGoal(AState current_state, AState goal_state) {
+        return current_state.equals(goal_state);
+    }
 }

@@ -35,9 +35,9 @@ public class Maze {
         setCellTo0(row, column);
     }
 
-    public void setGoal_pos(int row, int column) {
-        goal_position = new Position(row, column);
-        setCellTo0(row, column);
+    public void setGoal_pos(Position pos) {
+        goal_position = pos;
+//        setCellTo0(row, column);
     }
 
     public void setCellTo0(int row, int column) {
