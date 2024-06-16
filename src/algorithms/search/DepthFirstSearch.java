@@ -4,19 +4,36 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Stack;
 
+/**
+ * The DepthFirstSearch class implements the depth-first search algorithm.
+ * It extends the abstract class ASearchingAlgorithm and uses a stack to explore nodes depth-first.
+ */
 public class DepthFirstSearch extends ASearchingAlgorithm {
     private Stack<AState> stackState;
 
+    /**
+     * Constructs a DepthFirstSearch algorithm with an empty stack.
+     * Sets the algorithm name to "Depth First Search".
+     */
     public DepthFirstSearch() {
         stackState = new Stack<AState>();
         this.algorithm_name = "Depth First Search";
     }
 
+    /**
+     * Gets the name of the searching algorithm.
+     * @return the name of the algorithm
+     */
     @Override
     public String getName() {
         return algorithm_name;
     }
 
+    /**
+     * Solves the given search problem using depth-first search.
+     * @param searchable the search problem to solve
+     * @return the solution to the search problem
+     */
     @Override
     public Solution solve(ISearchable searchable) {
         if (searchable == null) { return new Solution(); }

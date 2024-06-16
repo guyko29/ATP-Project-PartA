@@ -3,8 +3,20 @@ package algorithms.mazeGenerators;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The MyMazeGenerator class generates a maze using a randomized algorithm.
+ * It extends the abstract class AMazeGenerator.
+ */
 public class MyMazeGenerator extends AMazeGenerator {
     private final Random random = new Random();
+
+    /**
+     * Generates a maze with specified rows and columns.
+     * The maze is generated using a randomized algorithm to create paths.
+     * @param row the number of rows in the maze
+     * @param column the number of columns in the maze
+     * @return a Maze object with randomly generated paths
+     */
     @Override
     public Maze generate(int row, int column) {
         Position start_pos = new Position(0, 0);
@@ -43,10 +55,27 @@ public class MyMazeGenerator extends AMazeGenerator {
         return maze;
     }
 
+    /**
+     * Checks if the specified row and column indices are within the bounds of the grid.
+     * @param row the row index to check
+     * @param column the column index to check
+     * @param grid_row the number of rows in the grid
+     * @param grid_col the number of columns in the grid
+     * @return true if the indices are within bounds, false otherwise
+     */
     public boolean checkRangeGrid(int row, int column, int grid_row, int grid_col) {
         return !(row < 0 || column < 0 || row >= grid_row || column >= grid_col);
     }
 
+    /**
+     * Creates a wall for an odd row index in the maze.
+     * @param row_pos the row index of the wall
+     * @param column_pos the column index of the wall
+     * @param rows the total number of rows in the maze
+     * @param columns the total number of columns in the maze
+     * @param walls the list of walls to update
+     * @param grid the maze grid
+     */
     public void createWallOddRow(int row_pos, int column_pos, int rows, int columns, ArrayList<Position> walls, int[][] grid) {
         if (checkRangeGrid(row_pos + 1, column_pos, rows, columns)) {
             if (!(grid[row_pos - 1][column_pos] == 0 && grid[row_pos + 1][column_pos] == 0)) {
@@ -63,13 +92,25 @@ public class MyMazeGenerator extends AMazeGenerator {
         }
     }
 
+    /**
+     * Creates a wall for an odd column index in the maze.
+     * @param row_pos the row index of the wall
+     * @param column_pos the column index of the wall
+     * @param rows the total number of rows in the maze
+     * @param columns the total number of columns in the maze
+     * @param walls the list of walls to update
+     * @param grid the maze grid
+     */
     public void createWallOddColumn(int row_pos, int column_pos, int rows, int columns, ArrayList<Position> walls, int[][] grid) {
         if (checkRangeGrid(row_pos, column_pos + 1, rows, columns) && checkRangeGrid(row_pos, column_pos - 1, rows, columns)) {
             if (!(grid[row_pos][column_pos + 1] == 0 && grid[row_pos][column_pos - 1] == 0)) {
                 if (grid[row_pos][column_pos - 1] == 1) {
                     grid[row_pos][column_pos] = 0;
                     grid[row_pos][column_pos - 1] = 0;
-                    addNeighborWall(row_pos, column_pos - 1, rows, columns, walls, grid);
+                    addNeighborWall(row_pos, column_pos - 1, rows, columns, walls, grid);/**
+                     * The MyMazeGenerator class generates a maze using a randomized algorithm.
+                     * It extends the abstract class AMazeGenerator.
+                     */
                 } else {
                     grid[row_pos][column_pos] = 0;
                     grid[row_pos][column_pos + 1] = 0;
@@ -79,6 +120,15 @@ public class MyMazeGenerator extends AMazeGenerator {
         }
     }
 
+    /**
+     * Adds neighboring walls to the list of walls.
+     * @param row_pos the row index of the current wall
+     * @param column_pos the column index of the current wall
+     * @param rows the total number of rows in the maze
+     * @param columns the total number of columns in the maze
+     * @param walls the list of walls to update
+     * @param grid the maze grid
+     */
     public void addNeighborWall(int row_pos, int column_pos, int rows, int columns, ArrayList<Position> walls, int[][] grid) {
         // check up neighbor
         if (checkRangeGrid(row_pos - 1, column_pos, rows, columns) && grid[row_pos - 1][column_pos] == 1 && !(walls.contains(new Position(row_pos - 1, column_pos)))) {

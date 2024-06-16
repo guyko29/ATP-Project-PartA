@@ -2,8 +2,20 @@ package algorithms.mazeGenerators;
 
 import java.util.Random;
 
+/**
+ * The SimpleMazeGenerator class generates a simple maze with random 0s and 1s.
+ * It extends the abstract class AMazeGenerator.
+ */
 public class SimpleMazeGenerator extends AMazeGenerator {
     private final Random random = new Random();
+
+    /**
+     * Generates a simple maze with specified rows and columns.
+     * The maze is randomly filled with 0s and 1s.
+     * @param row the number of rows in the maze
+     * @param column the number of columns in the maze
+     * @return a Maze object with randomly filled cells
+     */
     @Override
     public Maze generate(int row, int column) {
         Position start_pos = new Position(0, 0);
