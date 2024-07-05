@@ -147,4 +147,75 @@ public class Maze {
         }
         System.out.println(mazeStr.toString());
     }
+
+    public Maze(byte[] represent_maze) {
+        byte[] start_position = new byte[2];
+        start_position[0] = represent_maze[0];
+        start_position[1] = represent_maze[1];
+        this.start_position = new Position(fromByte_ToInt(start_position),fromByte_ToInt(start_position));
+        byte[] column_goal_bytes = new byte[2];
+        column_goal_bytes[0] = represent_maze[2];
+        column_goal_bytes[1] = represent_maze[3];
+        int column_goal = fromByte_ToInt(column_goal_bytes);
+        byte[] row_goal_bytes = new byte[2];
+        row_goal_bytes[0] = represent_maze[4];
+        row_goal_bytes[1] = represent_maze[5];
+        int row_goal = fromByte_ToInt(row_goal_bytes);
+        this.goal_position = new Position(row_goal, column_goal);
+        byte[] total_rows = new byte[2];
+        total_rows[0] = represent_maze[6];
+        total_rows[1] = represent_maze[7];
+        this.row = fromByte_ToInt(total_rows);
+        byte[] total_columns = new byte[2];
+        total_columns[0] = represent_maze[8];
+        total_columns[1] = represent_maze[9];
+        this.column = fromByte_ToInt(total_columns);
+        grid = new int [row][column];
+        int index = 10;
+        for (int r = 0; r < row; r++){
+            for (int col = 0; col < column; col++){
+                this.grid[r][col] = represent_maze[index];
+                index++;
+            }
+        }
+    }
+
+    public byte[] toByteArray() {
+        byte[] represent_maze = new byte[10 + this.row * this.column];
+        represent_maze[0] = 0;
+        represent_maze[1] = 0;
+        byte[] goal_position_column = fromInt_ToByte(this.goal_position.getColumnIndex());
+        byte[] goal_position_row = fromInt_ToByte(this.goal_position.getRowIndex());
+        represent_maze[2] = goal_position_column[0];
+        represent_maze[3] = goal_position_column[1];
+        represent_maze[4] = goal_position_row[0];
+        represent_maze[5] = goal_position_row[1];
+        byte[] total_rows = fromInt_ToByte(row);
+        represent_maze[6] = total_rows[0];
+        represent_maze[7] = total_rows[1];
+        byte[] total_columns = fromInt_ToByte(column);
+        represent_maze[8] = total_columns[0];
+        represent_maze[9] = total_columns[1];
+        int index = 10;
+        for (int r = 0; r < row; r++){
+            for (int col = 0; col < column; col++){
+                represent_maze[index] = (byte) this.grid[r][col];
+                index++;
+            }
+        }
+        return represent_maze;
+    }
+
+    public byte[] fromInt_ToByte(int num_to_convert) {
+        byte[] byte_represent = new byte[2];
+        int byte1 = (num_to_convert >> 8) & 0xFF; // Most significant byte
+        int byte2 = num_to_convert & 0xFF; // Least significant byte
+        byte_represent[0] = (byte) byte1;
+        byte_represent[1] = (byte) byte2;
+        return byte_represent;
+    }
+
+    public int fromByte_ToInt(byte[] bytes) {
+        return ((bytes[0] & 0xFF) << 8) | (bytes[1] & 0xFF);
+    }
 }
