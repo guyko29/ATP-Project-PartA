@@ -1,10 +1,12 @@
 package algorithms.search;
 
+import java.io.Serializable;
+
 /**
  * The AState class represents a state in a search algorithm.
  * It contains information about the cost, visited status, previous state, and state name.
  */
-public abstract class AState {
+public abstract class AState implements Serializable {
     private double cost;
     private boolean is_visited;
     private AState come_from;

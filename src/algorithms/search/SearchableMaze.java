@@ -3,6 +3,7 @@ package algorithms.search;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  * It implements the ISearchable interface and provides methods to get possible states,
  * start state, goal state, restart the maze, and check if the goal state is reached.
  */
-public class SearchableMaze implements ISearchable {
+public class SearchableMaze implements ISearchable, Serializable {
     private Maze maze;
     private AState[][] maze_state;
 

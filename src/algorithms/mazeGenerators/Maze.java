@@ -1,11 +1,13 @@
 package algorithms.mazeGenerators;
 
+import java.io.Serializable;
+
 /**
  * The Maze class represents a maze with specified rows and columns.
  * It allows setting start and goal positions, as well as manipulating
  * the maze grid cells.
  */
-public class Maze {
+public class Maze implements Serializable {
     private final int row;
     private final int column;
     private int[][] grid;
@@ -29,6 +31,38 @@ public class Maze {
         this.grid = new int[row][column];
         this.start_position = start_pos;
         this.goal_position = goal_pos;
+    }
+
+    public Maze(byte[] represent_maze) {
+        byte[] start_position = new byte[2];
+        start_position[0] = represent_maze[0];
+        start_position[1] = represent_maze[1];
+        this.start_position = new Position(fromByte_ToInt(start_position),fromByte_ToInt(start_position));
+        byte[] column_goal_bytes = new byte[2];
+        column_goal_bytes[0] = represent_maze[2];
+        column_goal_bytes[1] = represent_maze[3];
+        int column_goal = fromByte_ToInt(column_goal_bytes);
+        byte[] row_goal_bytes = new byte[2];
+        row_goal_bytes[0] = represent_maze[4];
+        row_goal_bytes[1] = represent_maze[5];
+        int row_goal = fromByte_ToInt(row_goal_bytes);
+        this.goal_position = new Position(row_goal, column_goal);
+        byte[] total_rows = new byte[2];
+        total_rows[0] = represent_maze[6];
+        total_rows[1] = represent_maze[7];
+        this.row = fromByte_ToInt(total_rows);
+        byte[] total_columns = new byte[2];
+        total_columns[0] = represent_maze[8];
+        total_columns[1] = represent_maze[9];
+        this.column = fromByte_ToInt(total_columns);
+        grid = new int [row][column];
+        int index = 10;
+        for (int r = 0; r < row; r++){
+            for (int col = 0; col < column; col++){
+                this.grid[r][col] = represent_maze[index];
+                index++;
+            }
+        }
     }
 
     /**
@@ -148,38 +182,6 @@ public class Maze {
         System.out.println(mazeStr.toString());
     }
 
-    public Maze(byte[] represent_maze) {
-        byte[] start_position = new byte[2];
-        start_position[0] = represent_maze[0];
-        start_position[1] = represent_maze[1];
-        this.start_position = new Position(fromByte_ToInt(start_position),fromByte_ToInt(start_position));
-        byte[] column_goal_bytes = new byte[2];
-        column_goal_bytes[0] = represent_maze[2];
-        column_goal_bytes[1] = represent_maze[3];
-        int column_goal = fromByte_ToInt(column_goal_bytes);
-        byte[] row_goal_bytes = new byte[2];
-        row_goal_bytes[0] = represent_maze[4];
-        row_goal_bytes[1] = represent_maze[5];
-        int row_goal = fromByte_ToInt(row_goal_bytes);
-        this.goal_position = new Position(row_goal, column_goal);
-        byte[] total_rows = new byte[2];
-        total_rows[0] = represent_maze[6];
-        total_rows[1] = represent_maze[7];
-        this.row = fromByte_ToInt(total_rows);
-        byte[] total_columns = new byte[2];
-        total_columns[0] = represent_maze[8];
-        total_columns[1] = represent_maze[9];
-        this.column = fromByte_ToInt(total_columns);
-        grid = new int [row][column];
-        int index = 10;
-        for (int r = 0; r < row; r++){
-            for (int col = 0; col < column; col++){
-                this.grid[r][col] = represent_maze[index];
-                index++;
-            }
-        }
-    }
-
     public byte[] toByteArray() {
         byte[] represent_maze = new byte[10 + this.row * this.column];
         represent_maze[0] = 0;
@@ -217,5 +219,16 @@ public class Maze {
 
     public int fromByte_ToInt(byte[] bytes) {
         return ((bytes[0] & 0xFF) << 8) | (bytes[1] & 0xFF);
+    }
+
+    public String getMazeDetails(){
+        String maze_details = "";
+        maze_details += goal_position.getRowIndex() + goal_position.getColumnIndex() + row + column;
+        for (int r = 0; r < row; r++){
+            for (int col = 0; col < column; col++) {
+                maze_details += this.grid[r][col];
+            }
+        }
+        return maze_details;
     }
 }

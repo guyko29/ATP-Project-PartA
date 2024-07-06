@@ -9,6 +9,8 @@ import java.util.Random;
 public class SimpleMazeGenerator extends AMazeGenerator {
     private final Random random = new Random();
 
+    public SimpleMazeGenerator() {}
+
     /**
      * Generates a simple maze with specified rows and columns.
      * The maze is randomly filled with 0s and 1s.
